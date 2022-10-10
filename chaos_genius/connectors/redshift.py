@@ -1,5 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
+from sqlalchemy.engine import URL
 
 from .base_db import BaseDb
 from .connector_utils import merge_dataframe_chunks
@@ -7,6 +8,7 @@ from .connector_utils import merge_dataframe_chunks
 
 class Redshift(BaseDb):
     db_name = "redshift"
+    db_driver = "redshift+psycopg2"
     test_db_query = "SELECT 1"
 
     __SQL_IDENTIFIER = '"'
@@ -28,8 +30,13 @@ class Redshift(BaseDb):
         password = db_info.get("password")
         if not(host and port and username and password and database):
             raise NotImplementedError("Database Credential not found for Redshift.")
-        self.sqlalchemy_db_uri = (
-            f"redshift+psycopg2://{username}:{password}@{host}:{port}/{database}"
+        self.sqlalchemy_db_uri = URL.create(
+            self.db_driver,
+            username=username,
+            password=password,
+            host=host,
+            database=database,
+            port=port,
         )
         return self.sqlalchemy_db_uri
 
