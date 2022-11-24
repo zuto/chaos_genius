@@ -1,5 +1,7 @@
 ![CG Header](https://raw.githubusercontent.com/chaos-genius/.github/main/images/CG-banner.png)
 
+A DELIGHTFUL TEST CHANGE
+
 <p align="center">
     <a href="https://www.chaosgenius.io/"><b>Website</b></a> •
     <a href="https://docs.chaosgenius.io"><b>Docs</b></a> •
