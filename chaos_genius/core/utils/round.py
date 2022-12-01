@@ -16,7 +16,9 @@ def round_number(n: float) -> Union[int, float]:
     elif abs_n >= 1:
         return round(n, 2)
     else:
-        return round(n, 3)
+        # TODO: Make the percentage visually in the frontend instead of this bodge
+        # if result is a decimal, multiply it by 100 to create force a percentage?
+        return round(n, 3) * 100
 
 
 def round_series(series: pd.Series) -> pd.Series:

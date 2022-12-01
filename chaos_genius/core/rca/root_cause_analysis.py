@@ -22,7 +22,7 @@ from chaos_genius.core.utils.utils import (
     get_user_string_from_subgroup_dict,
 )
 
-SUPPORTED_AGGREGATIONS = ["mean", "sum", "count"]
+SUPPORTED_AGGREGATIONS = ["mean", "sum", "count", "rate"]
 EPSILON = 1e-8
 
 
@@ -249,7 +249,7 @@ class RootCauseAnalysis:
     def _calculate_subgroup_values(self, data, suffix):
         agg_name = self._agg + suffix
         count_name = "count" + suffix
-        if self._agg == "mean":
+        if self._agg in ["mean", "rate"]:
             value_numerator = data[agg_name] * data[count_name]
             value_denominator = data[count_name].sum() + EPSILON
             value = value_numerator / value_denominator
@@ -316,7 +316,7 @@ class RootCauseAnalysis:
             agg_name = self._agg + suffix
             count_name = "count" + suffix
 
-            if self._agg == "mean":
+            if self._agg in ["mean", "rate"]:
                 value_numerator = (
                     combined_df[agg_name] * combined_df[count_name]
                 )
@@ -394,7 +394,7 @@ class RootCauseAnalysis:
 
                     t_d1 = self._grp1_df.loc[overlap_points_d1]
                     t_d2 = self._grp2_df.loc[overlap_points_d2]
-                    if self._agg == "mean":
+                    if self._agg in ["mean", "rate"]:
                         grp1_val = (
                             t_d1[self._metric].mean()
                             * t_d1[self._metric].count()
