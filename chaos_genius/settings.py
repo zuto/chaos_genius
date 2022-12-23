@@ -70,7 +70,7 @@ INTEGRATION_DATABASE = os.getenv("INTEGRATION_DATABASE")
 
 # Common Analytics Configuration
 DAYS_OFFSET_FOR_ANALTYICS = int(
-    os.getenv("DAYS_OFFSET_FOR_ANALTYICS", default=0)
+    os.getenv("DAYS_OFFSET_FOR_ANALTYICS", default=1)
 )
 HOURS_OFFSET_FOR_ANALTYICS = int(
     os.getenv("HOURS_OFFSET_FOR_ANALTYICS", default=0)
